@@ -20,7 +20,8 @@ function App() {
       let todoData = {
         id: Date.now(),
         data: todoText,
-        finishDate: finishDate
+        finishDate: finishDate,
+        checked: false,
       }
       dispatch(addTodo(todoData))
       setTodoText('')
@@ -32,7 +33,7 @@ function App() {
     <>
       <div className="container">
         <h1 style={{ marginBottom: '1rem' }}>TODO Dashboard</h1>
-        <div className="inputContainer">
+        <div className="inputContainer wrapper">
           <input className="inputField" type="text" value={todoText} placeholder="Enter your TODO..." onChange={(e) => setTodoText(e.target.value)} />
 
           <DatePicker className="datePicker" dateFormat="MM-dd-y" selected={finishDate} onChange={(date) => setFinishDate(date)} placeholderText={"Finish Date"} format="MM-dd-y" />

@@ -1,5 +1,7 @@
+@import './variables.scss';
+
 .todoTable {
-    width: 60%;
+    background: rgb(193, 193, 193);
     margin-top: 1rem;
 
     .table {
@@ -17,12 +19,12 @@
 }
 
 .btnEdit {
-    background-color: green;
+    background-color: $green;
     margin-right: 5px;
 }
 
 .btnDelete {
-    background-color: red;
+    background-color: $red;
 }
 
 table,
@@ -33,6 +35,14 @@ td {
     height: 35px;
 }
 
-tr:nth-child(even) {
-    background-color: #DFFF00;
+tbody tr td:nth-child(odd) {
+    background-color: $lightGray;
 }
+
+tbody tr td:nth-child(even) {
+    background-color: $lightGray;
+}
+
+// tbody tr td:nth-child(even) {
+//     background-color: $lightGray;
+// }
