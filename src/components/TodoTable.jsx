@@ -88,7 +88,7 @@ const TodoTable = () => {
                                             <td><input type="text" name='' value={text} onChange={(e) => setText(e.target.value)} /></td>
                                             <td>
 
-                                                <DatePicker className="datePicker" dateFormat="MM-dd-y" selected={finishD} onChange={(e) => setFinishD(e.target.value)} placeholderText={"Finish Date"} format="MM-dd-y" />
+                                                <DatePicker className="datePicker" dateFormat="MM-dd-y" selected={finishD} onChange={(date) => setFinishD(date)} placeholderText={"Finish Date"} format="MM-dd-y" />
 
                                             </td>
                                             <td><button className='btn btnEdit' onClick={handleUpdate} >Update</button></td>
