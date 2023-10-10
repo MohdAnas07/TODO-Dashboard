@@ -14,12 +14,11 @@ const TodoTable = () => {
     const [text, setText] = useState('')
     const [finishD, setFinishD] = useState('')
     const [editId, setEditId] = useState(-1)
+    const [fromDate, setFromDate] = useState('')
+    const [toDate, setToDate] = useState('')
 
     useEffect(() => {
-        const sorted = allTodos.sort((a, b) => {
-            return a.data - b.data;
-        });
-        console.log(sorted);
+
         setTodos(allTodos)
     }, [allTodos, todos])
 
@@ -49,48 +48,67 @@ const TodoTable = () => {
         }
     }
 
+    const handlePrint = () => {
+        const filteredTodo = todos.filter(todo => todo.finishDate >= fromDate && todo.finishDate >= toDate)
+        console.log(filteredTodo);
+        setTodos(filteredTodo)
+    }
+
     return (
-        <div className="todoTable">
-            <table className='table' style={{ width: "100%" }}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th style={{ width: "50%" }}>TODO</th>
-                        <th>Finish Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+        <>
+            <div className="selectContainer">
+                <div className="dateSelected">
+                    <DatePicker className="datePicker" name="from" dateFormat="MM-dd-y" selected={fromDate} onChange={(date) => setFromDate(date)} placeholderText={"From"} format="MM-dd-y" />
+                    <DatePicker className="datePicker" name="to" dateFormat="MM-dd-y" selected={toDate} onChange={(date) => setToDate(date)} placeholderText={"To"} format="MM-dd-y" />
 
-                <tbody>
-                    {
-                        todos?.map((todo, index) => {
-                            return (
-                                todo.id === editId ?
-                                    <tr>
-                                        <td>{index + 1}</td>
-                                        <td><input type="text" name='' value={text} onChange={(e) => setText(e.target.value)} /></td>
-                                        <td>
-                                            <DatePicker className="datePicker" dateFormat="MM-dd-y" selected={finishD} onChange={(e) => setFinishD(e.target.value)} placeholderText={"Finish Date"} format="MM-dd-y" />
-                                        </td>
-                                        <td><button className='btn btnEdit' onClick={handleUpdate} >Update</button></td>
-                                    </tr>
-                                    :
-                                    <tr>
-                                        <td>{index + 1}</td>
-                                        <td>{todo.data}</td>
-                                        <td>{`${todo.finishDate.getDate()}-${todo.finishDate.getMonth()}-${todo.finishDate.getFullYear()}`}</td>
-                                        <td className='btnBox'>
-                                            <button className='btn btnEdit' onClick={() => handleEditTodo(todo)}>Edit</button>
-                                            <button className='btn btnDelete' onClick={() => handleDeleteTodo(todo)}>Delete</button>
-                                        </td>
-                                    </tr>
-                            )
-                        })
-                    }
+                </div>
+                <div className="printSelected">
+                    <button className="btn" onClick={handlePrint}>Print Selected</button>
+                </div>
+            </div>
 
-                </tbody>
-            </table>
-        </div >
+            <div className="todoTable">
+                <table className='table' style={{ width: "100%" }}>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th style={{ width: "50%" }}>TODO</th>
+                            <th>Finish Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {
+                            todos?.map((todo, index) => {
+                                return (
+                                    todo.id === editId ?
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td><input type="text" name='' value={text} onChange={(e) => setText(e.target.value)} /></td>
+                                            <td>
+                                                <DatePicker className="datePicker" dateFormat="MM-dd-y" selected={finishD} onChange={(e) => setFinishD(e.target.value)} placeholderText={"Finish Date"} format="MM-dd-y" />
+                                            </td>
+                                            <td><button className='btn btnEdit' onClick={handleUpdate} >Update</button></td>
+                                        </tr>
+                                        :
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{todo.data}</td>
+                                            <td>{`${todo.finishDate.getMonth()}-${todo.finishDate.getDate()}-${todo.finishDate.getFullYear()}`}</td>
+                                            <td className='btnBox'>
+                                                <button className='btn btnEdit' onClick={() => handleEditTodo(todo)}>Edit</button>
+                                                <button className='btn btnDelete' onClick={() => handleDeleteTodo(todo)}>Delete</button>
+                                            </td>
+                                        </tr>
+                                )
+                            })
+                        }
+
+                    </tbody>
+                </table>
+            </div >
+        </>
     );
 };
 

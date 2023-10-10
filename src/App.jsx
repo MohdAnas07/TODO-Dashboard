@@ -4,13 +4,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import './styles/app.scss';
 import TodoTable from "./components/TodoTable";
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import { addTodo, deleteTodo, editTodo } from './store/action'
+import { addTodo } from './store/action'
 
 function App() {
   const [todoText, setTodoText] = useState('');
   const [finishDate, setFinishDate] = useState('');
-  const [fromDate, setFromDate] = useState('')
-  const [toDate, setToDate] = useState('')
   const dispatch = useDispatch()
   // const { allTodos } = useSelector((state) => state)
 
@@ -42,16 +40,7 @@ function App() {
           <button className="btn" onClick={handleTodo}>+ Add</button>
         </div>
 
-        <div className="selectContainer">
-          <div className="dateSelected">
-            <DatePicker className="datePicker" name="from" dateFormat="MM-dd-y" selected={fromDate} onChange={(date) => setFromDate(date)} placeholderText={"From"} format="MM-dd-y" />
-            <DatePicker className="datePicker" name="to" dateFormat="MM-dd-y" selected={toDate} onChange={(date) => setToDate(date)} placeholderText={"To"} format="MM-dd-y" />
-
-          </div>
-          <div className="printSelected">
-            <button className="btn">Print Selected</button>
-          </div>
-        </div>
+        {/* Table Data component======================== */}
         <TodoTable setTodoText={setTodoText} setFinishDate={setFinishDate} />
 
       </div>
