@@ -1,0 +1,34 @@
+.todoTable {
+    width: 60%;
+    margin-top: 1rem;
+
+    .table {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.btn {
+    padding: 4px 5px;
+    border: 1px solid;
+    cursor: pointer;
+    color: white;
+    font-weight: 400;
+}
+
+.btnEdit {
+    background-color: green;
+    margin-right: 5px;
+}
+
+.btnDelete {
+    background-color: red;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 35px;
+}

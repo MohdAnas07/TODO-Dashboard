@@ -1,0 +1,25 @@
+// COLORS =================================>>
+$white:#fff;
+$black:#000000;
+$gray:#333333;
+$midGray:#666666;
+$lightGray:#999999;
+
+
+// FONT Family ==============================>>
+$fontfamily: 'Work Sans',
+sans-serif;
+
+
+// Transition ==============================>>
+
+$fast:all 200ms ease-in-out;
+$smooth:all 300ms ease-in-out;
+$slow:all 600ms ease-in-out;
+
+/* Using SCSS variables to store breakpoints */
+$breakpoint-LGdesktop: 1800px;
+$breakpoint-desktop: 1330px;
+$breakpoint-smdesktop: 1024px;
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 426px;
