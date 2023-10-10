@@ -87,7 +87,9 @@ const TodoTable = () => {
                                             <td>{index + 1}</td>
                                             <td><input type="text" name='' value={text} onChange={(e) => setText(e.target.value)} /></td>
                                             <td>
+
                                                 <DatePicker className="datePicker" dateFormat="MM-dd-y" selected={finishD} onChange={(e) => setFinishD(e.target.value)} placeholderText={"Finish Date"} format="MM-dd-y" />
+
                                             </td>
                                             <td><button className='btn btnEdit' onClick={handleUpdate} >Update</button></td>
                                         </tr>
@@ -95,7 +97,7 @@ const TodoTable = () => {
                                         <tr>
                                             <td>{index + 1}</td>
                                             <td>{todo.data}</td>
-                                            <td>{`${todo.finishDate.getMonth()}-${todo.finishDate.getDate()}-${todo.finishDate.getFullYear()}`}</td>
+                                            <td>{`${todo.finishDate.getMonth() + 1}-${todo.finishDate.getDate()}-${todo.finishDate.getFullYear()}`}</td>
                                             <td className='btnBox'>
                                                 <button className='btn btnEdit' onClick={() => handleEditTodo(todo)}>Edit</button>
                                                 <button className='btn btnDelete' onClick={() => handleDeleteTodo(todo)}>Delete</button>

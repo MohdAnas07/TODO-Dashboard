@@ -32,3 +32,7 @@ td {
     border-collapse: collapse;
     height: 35px;
 }
+
+tr:nth-child(even) {
+    background-color: #DFFF00;
+}
