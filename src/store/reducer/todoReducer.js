@@ -6,7 +6,18 @@ export const todoReducer = (state = Todos, action) => {
     let { type, payload } = action
     switch (type) {
         case ADD_TODO:
-            return [...state, payload];
+            const allTodos = [...state, payload]
+            function compare(a, b) {
+                if (a.data.toLowerCase() < b.data.toLowerCase()) {
+                    return -1;
+                }
+                if (a.data.toLowerCase() > b.data.toLowerCase()) {
+                    return 1;
+                }
+                return 0;
+            }
+            allTodos.sort(compare)
+            return allTodos;
 
         case EDIT_TODO:
             const updatedArray = []
