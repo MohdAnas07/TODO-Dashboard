@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import '../styles/todoTable.scss'
 import { useSelector } from 'react-redux/es/exports'
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import { addTodo, deleteTodo, editTodo, updateCheckList } from '../store/action'
+import { addTodo, deleteTodo, editTodo, updateCheckList, filterAllTodos } from '../store/action'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -98,6 +98,7 @@ const TodoTable = () => {
             return 0;
         }
         filterTodos.sort(compare)
+        dispatch(filterAllTodos(filterTodos))
         setFilterTodos(filterTodos)
         console.log(filterTodos);
     }
@@ -107,13 +108,13 @@ const TodoTable = () => {
             return new Date(a.finishDate).getTime() - new Date(b.finishDate).getTime();
         }
         filterTodos.sort(compare)
+
+        dispatch(filterAllTodos(filterTodos))
         setFilterTodos(filterTodos)
         console.log(filterTodos);
+
     }
 
-    useEffect(() => {
-
-    }, [filterTodos, todos])
 
     return (
         <>
@@ -132,8 +133,8 @@ const TodoTable = () => {
                     <thead>
                         <tr>
                             <th>Select All</th>
-                            <th style={{ width: "45%" }} onClick={handleSortedByName}>TODO</th>
-                            <th onClick={handleSortedByDate}>Finish Date</th>
+                            <th style={{ width: "45%", cursor: 'pointer' }} onClick={handleSortedByName}>TODO</th>
+                            <th onClick={handleSortedByDate} style={{ cursor: 'pointer' }}>Finish Date</th>
                             <th style={{ width: "25%" }}>Actions</th>
                         </tr>
                     </thead>
@@ -187,4 +188,4 @@ const TodoTable = () => {
     );
 };
 
-export default TodoTable
+export default memo(TodoTable);

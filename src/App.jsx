@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './styles/app.scss';
@@ -48,4 +48,4 @@ function App() {
   )
 }
 
-export default App
+export default memo(App);

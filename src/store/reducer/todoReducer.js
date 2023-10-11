@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, EDIT_TODO, UPDATE_CHECKLIST } from "../constant";
+import { ADD_TODO, DELETE_TODO, EDIT_TODO, UPDATE_CHECKLIST, FILTERED_TODOS } from "../constant";
 
 const Todos = []
 
@@ -39,6 +39,9 @@ export const todoReducer = (state = Todos, action) => {
                 updatedCheckListArr.push(todo)
             })
             return updatedCheckListArr;
+
+        case FILTERED_TODOS:
+            return payload
 
         case DELETE_TODO:
             return state.filter(todo => todo.id !== payload.id)
