@@ -93,12 +93,8 @@ const TodoTable = () => {
 
     const handleSortedByName = () => {
         function compare(a, b) {
-            if (a.data.toLowerCase() < b.data.toLowerCase()) {
-                return -1;
-            }
-            if (a.data.toLowerCase() > b.data.toLowerCase()) {
-                return 1;
-            }
+            if (a.data.toLowerCase() < b.data.toLowerCase()) return -1;
+            if (a.data.toLowerCase() > b.data.toLowerCase()) return 1;
             return 0;
         }
         filterTodos.sort(compare)
@@ -114,6 +110,10 @@ const TodoTable = () => {
         setFilterTodos(filterTodos)
         console.log(filterTodos);
     }
+
+    useEffect(() => {
+
+    }, [filterTodos, todos])
 
     return (
         <>
