@@ -21,7 +21,7 @@ const TodoTable = () => {
     useEffect(() => {
         setFilterTodos(allTodos)
         setTodos(allTodos)
-    }, [allTodos])
+    }, [allTodos, filterTodos, todos])
 
 
     // for handle the delete todo taks
@@ -91,6 +91,29 @@ const TodoTable = () => {
         dispatch(updateCheckList(todoData))
     }
 
+    const handleSortedByName = () => {
+        function compare(a, b) {
+            if (a.data.toLowerCase() < b.data.toLowerCase()) {
+                return -1;
+            }
+            if (a.data.toLowerCase() > b.data.toLowerCase()) {
+                return 1;
+            }
+            return 0;
+        }
+        filterTodos.sort(compare)
+        setFilterTodos(filterTodos)
+        console.log(filterTodos);
+    }
+
+    const handleSortedByDate = () => {
+        function compare(a, b) {
+            return new Date(a.finishDate).getTime() - new Date(b.finishDate).getTime();
+        }
+        filterTodos.sort(compare)
+        setFilterTodos(filterTodos)
+        console.log(filterTodos);
+    }
 
     return (
         <>
@@ -109,8 +132,8 @@ const TodoTable = () => {
                     <thead>
                         <tr>
                             <th>Select All</th>
-                            <th style={{ width: "45%" }}>TODO</th>
-                            <th>Finish Date</th>
+                            <th style={{ width: "45%" }} onClick={handleSortedByName}>TODO</th>
+                            <th onClick={handleSortedByDate}>Finish Date</th>
                             <th style={{ width: "25%" }}>Actions</th>
                         </tr>
                     </thead>
