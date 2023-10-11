@@ -111,7 +111,7 @@ const TodoTable = () => {
                             <th>Select All</th>
                             <th style={{ width: "45%" }}>TODO</th>
                             <th>Finish Date</th>
-                            <th style={{ width: "25%" }}>Action</th>
+                            <th style={{ width: "25%" }}>Actions</th>
                         </tr>
                     </thead>
 
