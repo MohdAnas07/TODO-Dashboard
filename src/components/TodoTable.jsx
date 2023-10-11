@@ -1,16 +1,10 @@
 import { useEffect, useState } from 'react';
 import '../styles/todoTable.scss'
 import { useSelector } from 'react-redux/es/exports'
-import Todo from './Todo';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import { addTodo, deleteTodo, editTodo } from '../store/action'
+import { addTodo, deleteTodo, editTodo, updateCheckList } from '../store/action'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import Checkbox from '@mui/material/Checkbox';
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
 
 const TodoTable = () => {
     const { allTodos } = useSelector((state) => state)
@@ -22,14 +16,13 @@ const TodoTable = () => {
     const [editId, setEditId] = useState(-1)
     const [fromDate, setFromDate] = useState('')
     const [toDate, setToDate] = useState('')
-    const [selectedTodos, setSelectedTodos] = useState([]);
-    const [checkedTodo, setCheckedTodo] = useState(false);
 
     // For Assigning Todos Very first time or whenever alltodos change this component will render.
     useEffect(() => {
         setFilterTodos(allTodos)
         setTodos(allTodos)
     }, [allTodos])
+
 
     // for handle the delete todo taks
     const handleDeleteTodo = (todo) => {
@@ -66,6 +59,7 @@ const TodoTable = () => {
             handleFilter()
     }, [fromDate, toDate])
 
+
     // filter todo by date range
     const handleFilter = () => {
         let frmD = new Date(fromDate).getTime()
@@ -78,15 +72,25 @@ const TodoTable = () => {
         setFilterTodos(filteredTodo)
     }
 
-
+    // Function for handling the print api
     const handlePrint = () => {
-        console.log(selectedTodos);
+        const selectedTodoArray = []
+        for (let t of allTodos) {
+            if (t.checked) {
+                selectedTodoArray.push(t)
+            }
+        }
+        console.log(selectedTodoArray);
     }
 
-    const handleSelect = (todo) => {
-        setCheckedTodo(p => !p)
-        console.log(checkedTodo);
+    // Function for update todo checked or not in store data
+    const handleSelect = (todoId) => {
+        let todoData = {
+            id: todoId,
+        }
+        dispatch(updateCheckList(todoData))
     }
+
 
     return (
         <>
@@ -107,7 +111,7 @@ const TodoTable = () => {
                             <th>Select All</th>
                             <th style={{ width: "45%" }}>TODO</th>
                             <th>Finish Date</th>
-                            <th>Action</th>
+                            <th style={{ width: "25%" }}>Action</th>
                         </tr>
                     </thead>
 
@@ -119,7 +123,12 @@ const TodoTable = () => {
                                     todo.id === editId ?
                                         <tr key={todo.id}>
                                             <td>
-                                                <input type="checkbox" name="checked" value={checkedTodo} onClick={() => handleSelect(todo)} />
+                                                <input type="checkbox"
+                                                    name="checked"
+                                                    onClick={() =>
+                                                        handleSelect(todo.id)
+                                                    }
+                                                />
                                             </td>
                                             <td><input type="text" name='' value={text} onChange={(e) => setText(e.target.value)} /></td>
                                             <td>
@@ -132,10 +141,8 @@ const TodoTable = () => {
                                             <td>
                                                 <input type="checkbox"
                                                     name="checked"
-                                                    checked={checkedTodo}
-                                                    value={checkedTodo}
-                                                    onClick={(e) =>
-                                                        console.log(!checkedTodo)
+                                                    onClick={() =>
+                                                        handleSelect(todo.id)
                                                     }
                                                 />
                                             </td>

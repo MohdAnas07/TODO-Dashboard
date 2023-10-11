@@ -30,22 +30,21 @@ function App() {
 
 
   return (
-    <>
-      <div className="container">
-        <h1 style={{ marginBottom: '1rem' }}>TODO Dashboard</h1>
-        <div className="inputContainer wrapper">
-          <input className="inputField" type="text" value={todoText} placeholder="Enter your TODO..." onChange={(e) => setTodoText(e.target.value)} />
+    <div className="container">
 
-          <DatePicker className="datePicker" dateFormat="MM-dd-y" selected={finishDate} onChange={(date) => setFinishDate(date)} placeholderText={"Finish Date"} format="MM-dd-y" />
+      <h1 style={{ marginBottom: '1rem' }}>TODO Dashboard</h1>
+      <div className="inputContainer wrapper">
+        <input className="inputField" type="text" value={todoText} placeholder="Enter your TODO..." onChange={(e) => setTodoText(e.target.value)} />
 
-          <button className="btn" onClick={handleTodo}>+ Add</button>
-        </div>
+        <DatePicker className="datePicker" dateFormat="MM-dd-y" selected={finishDate} onChange={(date) => setFinishDate(date)} placeholderText={"Finish Date"} format="MM-dd-y" />
 
-        {/* Table Data component======================== */}
-        <TodoTable setTodoText={setTodoText} setFinishDate={setFinishDate} />
-
+        <button className="btn" onClick={handleTodo}>+ Add</button>
       </div>
-    </>
+
+      {/* Table Data component======================== */}
+      <TodoTable setTodoText={setTodoText} setFinishDate={setFinishDate} />
+
+    </div>
   )
 }
 

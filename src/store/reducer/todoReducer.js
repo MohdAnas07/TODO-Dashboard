@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, EDIT_TODO } from "../constant";
+import { ADD_TODO, DELETE_TODO, EDIT_TODO, UPDATE_CHECKLIST } from "../constant";
 
 const Todos = []
 
@@ -29,6 +29,16 @@ export const todoReducer = (state = Todos, action) => {
                 updatedArray.push(todo)
             })
             return updatedArray;
+
+        case UPDATE_CHECKLIST:
+            const updatedCheckListArr = []
+            state.map(todo => {
+                if (todo.id === payload.id) {
+                    todo.checked = !todo.checked;
+                }
+                updatedCheckListArr.push(todo)
+            })
+            return updatedCheckListArr;
 
         case DELETE_TODO:
             return state.filter(todo => todo.id !== payload.id)
